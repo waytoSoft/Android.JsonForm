@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="form_label_size">16sp</dimen>
+    <dimen name="form_text_size">16sp</dimen>
+    <dimen name="form_required_size">18sp</dimen>
+
+    <dimen name="form_label_width">90dp</dimen>
+    <dimen name="form_line_height">1dp</dimen>
+    <dimen name="form_layout_padding">10dp</dimen>
+    <dimen name="form_text_padding">5dp</dimen>
+    <dimen name="form_text_marginRight">10dp</dimen>
+    <dimen name="form_line_marginLeft">15dp</dimen>
+</resources>

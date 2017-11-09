@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">JSONForm</string>
+
+    <string name="form_edit_hint">请输入</string>
+</resources>
