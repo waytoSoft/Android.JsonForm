@@ -10,20 +10,23 @@
     <com.jg.jsonform.view.FormEditView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:FormLabel="消防栓编号"
-        app:FormRequired="true" />
+        app:FormEditLabel="消防栓编号"
+        app:FormEditRequired="true" />
 
     <com.jg.jsonform.view.FormEditView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:FormRightDrawable="@drawable/ic_chevron_right_black_24dp"
-        app:FormEnabled="false"
-        app:FormLabel="设施地址" />
+        app:FormEditLabel="设施地址" />
 
     <com.jg.jsonform.view.FormEditView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:FormLabel="所属街道"
-        app:FormLastItem="true" />
+        app:FormEditLabel="所属街道" />
+
+    <com.jg.jsonform.view.FormTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:FormTextLabel="所属机构"
+        app:FormTextLastItem="true" />
 
 </LinearLayout>

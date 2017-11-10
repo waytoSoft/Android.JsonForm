@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.jg.jsonform.R;
 
 /**
- * 输入表单格式
+ * 输入表单
  * <p>
  * author: hezhiWu <hezhi.woo@gmail.com>
  * version: V1.0
@@ -96,28 +96,28 @@ public class FormEditView extends LinearLayout {
     private void initAttributeset(Context context, AttributeSet attrs, int defStyle) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FormEditView, defStyle, 0);
 
-        String label = typedArray.getString(R.styleable.FormEditView_FormLabel);
+        String label = typedArray.getString(R.styleable.FormEditView_FormEditLabel);
         setFormLabel(label);
 
-        String text = typedArray.getString(R.styleable.FormEditView_FormText);
+        String text = typedArray.getString(R.styleable.FormEditView_FormEditText);
         setFormText(text);
 
-        String hint = typedArray.getString(R.styleable.FormEditView_FormHint);
+        String hint = typedArray.getString(R.styleable.FormEditView_FormEditHint);
         setFormHint(hint);
 
-        boolean required = typedArray.getBoolean(R.styleable.FormEditView_FormRequired, false);
+        boolean required = typedArray.getBoolean(R.styleable.FormEditView_FormEditRequired, false);
         setFormRequired(required);
 
-        boolean enable = typedArray.getBoolean(R.styleable.FormEditView_FormEnabled, true);
+        boolean enable = typedArray.getBoolean(R.styleable.FormEditView_FormEditEnabled, true);
         setFormEnabled(enable);
 
-        int type = typedArray.getInt(R.styleable.FormEditView_FormInputType, 0x00020001);
+        int type = typedArray.getInt(R.styleable.FormEditView_FormEditInputType, 0x00020001);
         setFormInputType(type);
 
-        boolean lastItem = typedArray.getBoolean(R.styleable.FormEditView_FormLastItem, false);
+        boolean lastItem = typedArray.getBoolean(R.styleable.FormEditView_FormEditLastItem, false);
         setFormLastItem(lastItem);
 
-        Drawable drawable = typedArray.getDrawable(R.styleable.FormEditView_FormRightDrawable);
+        Drawable drawable = typedArray.getDrawable(R.styleable.FormEditView_FormEditRightDrawable);
         setFormRightDrawable(drawable);
     }
 
@@ -194,7 +194,7 @@ public class FormEditView extends LinearLayout {
     }
 
     /**
-     * 设置内容
+     * 设置提示信息
      * <p>
      * author: hezhiWu
      * created at 2017/11/9 15:59
@@ -224,7 +224,7 @@ public class FormEditView extends LinearLayout {
     }
 
     /**
-     * 设置提示信息
+     * 设置是否必填项
      * <p>
      * author: hezhiWu
      * created at 2017/11/9 15:59

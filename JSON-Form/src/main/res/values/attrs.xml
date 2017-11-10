@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="FormEditView">
-        <attr name="FormLabel" format="reference|string" />
-        <attr name="FormHint" format="reference|string" />
-        <attr name="FormText" format="reference|string" />
-        <attr name="FormRequired" format="boolean" />
-        <attr name="FormEnabled" format="boolean" />
-        <attr name="FormLastItem" format="boolean" />
-        <attr name="FormRightDrawable" format="reference" />
-        <attr name="FormInputType" format="enum">
+        <attr name="FormEditLabel" format="reference|string" />
+        <attr name="FormEditHint" format="reference|string" />
+        <attr name="FormEditText" format="reference|string" />
+        <attr name="FormEditRequired" format="boolean" />
+        <attr name="FormEditEnabled" format="boolean" />
+        <attr name="FormEditLastItem" format="boolean" />
+        <attr name="FormEditRightDrawable" format="reference" />
+        <attr name="FormEditInputType" format="enum">
             <enum name="none" value="0x00000000" />
             <enum name="text" value="0x00000001" />
             <enum name="textCapCharacters" value="0x00001001" />
@@ -42,6 +42,14 @@
             <enum name="date" value="0x00000014" />
             <enum name="time" value="0x00000024" />
         </attr>
+    </declare-styleable>
 
+    <declare-styleable name="FormTextView">
+        <attr name="FormTextLabel" format="reference|string" />
+        <attr name="FormTextHint" format="reference|string" />
+        <attr name="FormTextText" format="reference|string" />
+        <attr name="FormTextRequired" format="reference|string" />
+        <attr name="FormTextLastItem" format="boolean" />
+        <attr name="FormTextRightDrawable" format="reference" />
     </declare-styleable>
 </resources>

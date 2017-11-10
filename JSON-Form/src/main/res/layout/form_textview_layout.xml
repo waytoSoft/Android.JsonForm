@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/form_layout_padding">
+
+        <TextView
+            android:id="@+id/Form_TextView_Required"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="*"
+            android:textColor="@color/form_required"
+            android:textSize="@dimen/form_required_size"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/Form_TextView_label"
+            android:layout_width="@dimen/form_label_width"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/Form_TextView_Required"
+            android:text="Label"
+            android:textColor="@color/form_label"
+            android:textSize="@dimen/form_label_size" />
+
+        <TextView
+            android:id="@+id/Form_TextView_Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/form_text_marginRight"
+            android:layout_toLeftOf="@+id/Form_TextView_Drawable_right"
+            android:layout_toRightOf="@+id/Form_TextView_label"
+            android:background="@android:color/white"
+            android:hint="@string/form_text_hint"
+            android:padding="@dimen/form_text_padding"
+            android:scrollHorizontally="false"
+            android:singleLine="false"
+            android:textColor="@color/form_text"
+            android:textColorHint="@color/form_hint"
+            android:textSize="@dimen/form_text_size" />
+
+        <ImageView
+            android:id="@+id/Form_TextView_Drawable_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_chevron_right_black_24dp"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/Form_TextView_Line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_line_height"
+        android:layout_marginLeft="@dimen/form_line_marginLeft"
+        android:background="@color/form_line" />
+
+</LinearLayout>
