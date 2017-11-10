@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/form_layout_padding">
+
+        <TextView
+            android:id="@+id/Form_SelectionBox_Required"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/form_required"
+            android:textSize="@dimen/form_required_size"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/Form_selectionBox_label"
+            android:layout_width="@dimen/form_label_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_toRightOf="@+id/Form_SelectionBox_Required"
+            android:gravity="center|left"
+            android:text="label"
+            android:textColor="@color/form_label"
+            android:textSize="@dimen/form_label_size" />
+
+        <com.jg.jsonform.view.SelfAdapterGridView
+            android:id="@+id/Form_selectionBox_GridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/Form_selectionBox_label"
+            android:gravity="center"
+            android:numColumns="2" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/Form_selectionBox_Line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_line_height"
+        android:layout_marginLeft="@dimen/form_line_marginLeft"
+        android:background="@color/form_line" />
+
+    <LinearLayout
+        android:id="@+id/Form_selectionBox_Container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+</LinearLayout>

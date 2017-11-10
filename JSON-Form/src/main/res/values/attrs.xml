@@ -52,4 +52,12 @@
         <attr name="FormTextLastItem" format="boolean" />
         <attr name="FormTextRightDrawable" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="FormSelectionBoxView">
+        <attr name="FormSelectionBoxLabel" format="reference|string" />
+        <attr name="FormSelectionBoxRequired" format="boolean" />
+        <attr name="FormSelectionBoxLastItem" format="boolean" />
+        <attr name="FormSelectionBoxNumColumns" format="integer" />
+    </declare-styleable>
+
 </resources>
