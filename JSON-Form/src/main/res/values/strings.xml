@@ -3,4 +3,5 @@
 
     <string name="form_edit_hint">请输入</string>
     <string name="form_text_hint">请选择</string>
+    <string name="nothing">无</string>
 </resources>

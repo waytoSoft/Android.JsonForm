@@ -272,6 +272,18 @@ public class FormTextView extends LinearLayout {
     }
 
     /**
+     * 设置右边图片显示状态
+     * <p>
+     * author: hezhiWu
+     * created at 2017/11/13 10:43
+     */
+    public FormTextView setFormRightDrawableVisibility(int visibility) {
+        mDrawableRight.setVisibility(visibility);
+
+        return this;
+    }
+
+    /**
      * 设置监听器
      * <p>
      * author: hezhiWu

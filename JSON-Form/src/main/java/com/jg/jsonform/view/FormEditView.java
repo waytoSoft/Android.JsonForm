@@ -324,6 +324,18 @@ public class FormEditView extends LinearLayout {
     }
 
     /**
+     * 设置右边图标显示状态
+     * <p>
+     * author: hezhiWu
+     * created at 2017/11/13 10:41
+     */
+    public FormEditView setFormRightVisibility(int visibility) {
+        mDrawableRight.setVisibility(visibility);
+
+        return this;
+    }
+
+    /**
      * 设置点击事情
      * <p>
      * author: hezhiWu
