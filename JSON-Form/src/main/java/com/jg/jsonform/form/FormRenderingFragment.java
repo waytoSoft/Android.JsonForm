@@ -1,4 +1,4 @@
-package com.jg.jsonform;
+package com.jg.jsonform.form;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +15,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.jg.jsonform.FormConstacts;
+import com.jg.jsonform.R;
+import com.jg.jsonform.SelectPanelBottomDialog;
+import com.jg.jsonform.attachment.ImageAttachmentView;
 import com.jg.jsonform.entity.EditEntity;
 import com.jg.jsonform.entity.FormEntity;
 import com.jg.jsonform.entity.SelectionBoxEntity;
 import com.jg.jsonform.entity.StructureEntity;
 import com.jg.jsonform.entity.TextEntity;
+import com.jg.jsonform.picture.SelectImageActivity;
+import com.jg.jsonform.picture.model.data.PictureEntity;
+import com.jg.jsonform.utils.IDateTimeUtils;
+import com.jg.jsonform.utils.IStringUtils;
 import com.jg.jsonform.view.FormEditView;
 import com.jg.jsonform.view.FormSelectionBoxView;
 import com.jg.jsonform.view.FormTextView;
@@ -28,6 +36,7 @@ import com.jg.jsonform.view.ReboundScrollView;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,17 +52,15 @@ public abstract class FormRenderingFragment extends Fragment {
 
     ReboundScrollView mScrollView;
     private LinearLayout mContainerLayout, mBottomLayout, mMoreContainerLayout;
-    private TextView mMoreExtendTextView;
+    private TextView mImageAttachmentViewTitle, mMoreExtendTextView, mEmptyImageTextView;
 
     private FormSelectionBoxView selectionBoxView;
+
+    private ImageAttachmentView mImageAttachmentView;
 
     public boolean isImage;
 
     public boolean isImagRequired;
-
-    public boolean isVideo;
-
-    public boolean isVideoRequired;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -90,6 +97,8 @@ public abstract class FormRenderingFragment extends Fragment {
         mBottomLayout = (LinearLayout) view.findViewById(R.id.form_rendering_ButtomLayout);
         mMoreContainerLayout = (LinearLayout) view.findViewById(R.id.form_rendering_more_container);
         mMoreExtendTextView = (TextView) view.findViewById(R.id.form_rendering_more_extend_textView);
+        mImageAttachmentView = (ImageAttachmentView) view.findViewById(R.id.form_rendering_ImageAttachmentView);
+        mImageAttachmentViewTitle = (TextView) view.findViewById(R.id.form_rendering_ImageAttachmentView_Title);
         mMoreExtendTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -137,11 +146,11 @@ public abstract class FormRenderingFragment extends Fragment {
         }
 
         /*初始化附件*/
-        isImage = structureEntity.isImage();
-        isImagRequired = structureEntity.isImagRequired();
-        isVideo = structureEntity.isVideo();
-        isVideoRequired = structureEntity.isVideoRequired();
+        isImage = structureEntity.isImg();
+        isImagRequired = structureEntity.isImgRequired();
 
+        mImageAttachmentView.setVisibility(isImage ? View.VISIBLE : View.GONE);
+        mImageAttachmentViewTitle.setVisibility(isImage ? View.VISIBLE : View.GONE);
 
         /*渲染默认表单*/
         List<FormEntity> formEntities = structureEntity.getForm();
@@ -252,8 +261,10 @@ public abstract class FormRenderingFragment extends Fragment {
 
             /*设置输入类型*/
             int inputType = editEntity.getInputType();
-            if (inputType == 1) {
-                writeView.setFormInputType(InputType.TYPE_CLASS_TEXT);
+            if (inputType == 0) {
+                writeView.setFormInputType(0x00020001);
+            } else {
+                writeView.setFormInputType(inputType);
             }
         }
 
@@ -306,11 +317,12 @@ public abstract class FormRenderingFragment extends Fragment {
                     if (textEntity.isSuperClick()) {
                         onClickSelectItemViewListener(selectView, entity.getSubmitKey());
                     } else {
-//                        SelectPanelBottomDialog dialog = new SelectPanelBottomDialog();
-//                        dialog.setContentListExtended(textEntity.getArray());
-//                        dialog.setTextView(selectView.getContentTextView());
-//                        dialog.setSelectContent(selectView.getContentText());
-//                        dialog.show(getFragmentManager(), getClass().getSimpleName());
+                        new SelectPanelBottomDialog(getActivity())
+                                .setMultieselect(false)
+                                .setContent(textEntity.getKey())
+                                .setTextView(selectView.getFormTextView())
+                                .show();
+//                        Toast.makeText(getActivity(),"Please SuperClick",Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -381,19 +393,7 @@ public abstract class FormRenderingFragment extends Fragment {
      * created at 2017/10/25 14:50
      */
     public String getImageAttachmentViewTitle() {
-//        return getString(R.string.image_title);
-        return null;
-    }
-
-    /**
-     * 获取视频附件标题(默认标题：添加视频)
-     * <p>
-     * author: hezhiWu
-     * created at 2017/10/25 14:50
-     */
-    public String getVideoAttachmentViewTitle() {
-//        return getString(R.string.video_title);
-        return null;
+        return getString(R.string.image_title);
     }
 
     /**
@@ -456,11 +456,11 @@ public abstract class FormRenderingFragment extends Fragment {
             JSONObject jsonObject = new JSONObject(formJson);
             /*处理附件*/
             if (!isFlod) {
-//                String attachmentJson = jsonObject.getString("Attachments");
-//                List<Attachment> attachments = new Gson().fromJson(attachmentJson, new TypeToken<ArrayList<Attachment>>() {
-//                }.getType());
-//
-//                renderingAttachment(attachments, enabled);
+                String attachmentJson = jsonObject.getString("Attachments");
+                List<String> attachments = new Gson().fromJson(attachmentJson, new TypeToken<ArrayList<String>>() {
+                }.getType());
+
+                renderingAttachment(attachments, enabled);
             }
 
             for (int i = 0; i < count; i++) {
@@ -573,56 +573,32 @@ public abstract class FormRenderingFragment extends Fragment {
      * @param attachments
      * @param enabled
      */
-//    private void renderingAttachment(List<Attachment> attachments, boolean enabled) {
-//        //修改标题
-//        mImageAttachmentViewTitle.setText("图片信息");
-//        mVideoSelectViewTitle.setText("视频信息");
-//
-//        /*初始化图片文件*/
-//        if (isImage) {
-//            boolean isHasImage = false;
-//            for (Attachment attachment : attachments) {
-//                if (attachment.getUrl().contains(".png") || attachment.getUrl().contains(".jpg")) {
-//                    isHasImage = true;
-//                    if (enabled) {
-//                        mImageAttachmentView.setImageListToAttachment(attachment);
-//                    } else {
-//                        mImageAttachmentView.setShowImageListToAttachment(attachment);
-//                    }
-//                }
-//            }
-//            if (!isHasImage) {
-//                mEmptyImageTextView.setVisibility(View.VISIBLE);
-//                mImageAttachmentView.setVisibility(View.GONE);
-//            }
-//        } else {
-//            mImageAttachmentView.setVisibility(View.GONE);
-//            mImageAttachmentViewTitle.setVisibility(View.GONE);
-//        }
-//
-//        /*初始化视频文件*/
-//        if (isVideo) {
-//            boolean isHasVideo = false;
-//            for (Attachment attachment : attachments) {
-//                if (attachment.getUrl().contains(".mp4")) {
-//                    isHasVideo = true;
-//                    // TODO 处理视频文件
-//                    if (enabled) {
-//                        mImageAttachmentView.setImageListToAttachment(attachment);
-//                    } else {
-//                        mImageAttachmentView.setShowImageListToAttachment(attachment);
-//                    }
-//                }
-//            }
-//            if (!isHasVideo) {
-//                mEmptyVideoTextView.setVisibility(View.VISIBLE);
-//                mVideoSelectView.setVisibility(View.GONE);
-//            }
-//        } else {
-//            mVideoSelectViewTitle.setVisibility(View.GONE);
-//            mVideoSelectView.setVisibility(View.GONE);
-//        }
-//    }
+    private void renderingAttachment(List<String> attachments, boolean enabled) {
+        //修改标题
+        mImageAttachmentViewTitle.setText("图片信息");
+
+        /*初始化图片文件*/
+        if (isImage) {
+            boolean isHasImage = false;
+            for (String attachment : attachments) {
+                if (attachment.contains(".png") || attachment.contains(".jpg")) {
+                    isHasImage = true;
+                    if (enabled) {
+                        mImageAttachmentView.setImageList(attachment);
+                    } else {
+                        mImageAttachmentView.setShowImage(attachment);
+                    }
+                }
+            }
+            if (!isHasImage) {
+                mEmptyImageTextView.setVisibility(View.VISIBLE);
+                mImageAttachmentView.setVisibility(View.GONE);
+            }
+        } else {
+            mImageAttachmentView.setVisibility(View.GONE);
+            mImageAttachmentViewTitle.setVisibility(View.GONE);
+        }
+    }
 
     /**
      * 添加底部View
@@ -704,6 +680,15 @@ public abstract class FormRenderingFragment extends Fragment {
 
                 value = writeView.getFormText();
 
+                if (formEntity.getEdit() != null) {
+                    String regular = formEntity.getEdit().getRegular();
+                    if (!TextUtils.isEmpty(regular))
+                        if (!IStringUtils.matchingRegular(value, regular)) {
+                            Toast.makeText(getActivity(), formEntity.getLabel() + "格式不正确", Toast.LENGTH_LONG).show();
+                            return null;
+                        }
+                }
+
                 /*获取TextView表单值*/
             } else if (type == FormConstacts.FormType.Text.getValue()) {
 
@@ -716,6 +701,18 @@ public abstract class FormRenderingFragment extends Fragment {
                 }
 
                 value = selectView.getFormText();
+
+                String[] array = formEntity.getText().getKey();
+                int[] values = formEntity.getText().getValue();
+                if (values != null && values.length > 0 && array != null && array.length > 0)
+                    if (array != null && array.length > 0) {
+                        for (int j = 0; j < array.length; j++) {
+                            if (array[j].equals(value)) {
+                                value = String.valueOf(values[j]);
+                                break;
+                            }
+                        }
+                    }
 
             } else if (type == FormConstacts.FormType.SelectionBox.getValue()) {
 
@@ -738,7 +735,7 @@ public abstract class FormRenderingFragment extends Fragment {
 //        if (isMatchingAccessories) {
 //            /*获取图片资源*/
 //            String images = null;
-//            if (isImage && isImagRequired) {
+//            if (isImg && isImgRequired) {
 //                if (TextUtils.isEmpty(mImageAttachmentView.getImageStrs())) {
 //                    WaytoProgressDialog.showPromptMessage(getContext(), R.mipmap.icon_tip, "图片不能为空");
 //                    return jsonObject;
@@ -810,11 +807,11 @@ public abstract class FormRenderingFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
           /*图片选择回调*/
-//        if (resultCode == SelectPictureActivity.SELECT_PICTURE_RESULT_CODE) {
-//            if (resultCode == SelectPictureActivity.SELECT_PICTURE_RESULT_CODE) {
-//                List<PictureEntity> lists = (List<PictureEntity>) data.getSerializableExtra("result");
-//                mImageAttachmentView.setImageListToEntity(lists);
-//            }
-//        }
+        if (resultCode == SelectImageActivity.SELECT_PICTURE_RESULT_CODE) {
+            if (resultCode == SelectImageActivity.SELECT_PICTURE_RESULT_CODE) {
+                List<PictureEntity> lists = (List<PictureEntity>) data.getSerializableExtra("imgs");
+                mImageAttachmentView.setImageListToEntity(lists);
+            }
+        }
     }
 }

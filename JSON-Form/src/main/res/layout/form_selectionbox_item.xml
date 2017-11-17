@@ -6,17 +6,19 @@
     <LinearLayout
         android:id="@+id/SelectionBox_Item_Layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:gravity="center"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <RadioButton
             android:id="@+id/SelectionBox_Item_Radio"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/radionbutton_selector"
+            android:button="@null" />
 
         <TextView
             android:id="@+id/SelectionBox_Item_Name"

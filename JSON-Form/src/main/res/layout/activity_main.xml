@@ -1,32 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.jg.jsonform.MainActivity">
 
-    <com.jg.jsonform.view.FormEditView
+    <Button
+        android:id="@+id/add_asset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:FormEditLabel="消防栓编号"
-        app:FormEditRequired="true" />
+        android:text="纯表单" />
 
-    <com.jg.jsonform.view.FormEditView
+    <Button
+        android:id="@+id/show_asset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:FormEditLabel="设施地址" />
+        android:text="折叠表单" />
 
-    <com.jg.jsonform.view.FormEditView
+    <Button
+        android:id="@+id/edit_asset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:FormEditLabel="所属街道" />
-
-    <com.jg.jsonform.view.FormTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:FormTextLabel="所属机构"
-        app:FormTextLastItem="true" />
-
+        android:text="带附件表单" />
 </LinearLayout>

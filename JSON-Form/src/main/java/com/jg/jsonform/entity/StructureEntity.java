@@ -12,32 +12,20 @@ import java.util.List;
  */
 public class StructureEntity implements Serializable {
 
-    public boolean image;
+    public boolean img;
 
-    public boolean imagRequired;
-
-    public boolean video;
-
-    public boolean videoRequired;
+    public boolean imgRequired;
 
     public List<FormEntity> form;
 
     public List<FormEntity> flodForm;
 
-    public boolean isImage() {
-        return image;
+    public boolean isImg() {
+        return img;
     }
 
-    public void setImage(boolean image) {
-        this.image = image;
-    }
-
-    public boolean isVideo() {
-        return video;
-    }
-
-    public void setVideo(boolean video) {
-        this.video = video;
+    public void setImg(boolean img) {
+        this.img = img;
     }
 
     public List<FormEntity> getForm() {
@@ -48,20 +36,12 @@ public class StructureEntity implements Serializable {
         this.form = form;
     }
 
-    public boolean isImagRequired() {
-        return imagRequired;
+    public boolean isImgRequired() {
+        return imgRequired;
     }
 
-    public void setImagRequired(boolean imagRequired) {
-        this.imagRequired = imagRequired;
-    }
-
-    public boolean isVideoRequired() {
-        return videoRequired;
-    }
-
-    public void setVideoRequired(boolean videoRequired) {
-        this.videoRequired = videoRequired;
+    public void setImgRequired(boolean imgRequired) {
+        this.imgRequired = imgRequired;
     }
 
     public List<FormEntity> getFlodForm() {

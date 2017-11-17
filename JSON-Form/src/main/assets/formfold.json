@@ -1,0 +1,187 @@
+{
+  "form": [
+    {
+      "label": "设施编号",
+      "hint": "输入设施编号",
+      "type": 1,
+      "required": true,
+      "submitKey": "assetCode"
+    },
+    {
+      "label": "设施类型",
+      "hint": "请选择设施类型",
+      "type": 2,
+      "required": true,
+      "submitKey": "type",
+      "text": {
+        "superClick": true
+      }
+    },
+    {
+      "label": "设施状态",
+      "hint": "选择设施状态",
+      "type": 2,
+      "required": true,
+      "submitKey": "status",
+      "text": {
+        "key": [
+          "正常",
+          "故障",
+          "备案",
+          "未移交"
+        ],
+        "value": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "label": "设施地址",
+      "hint": "请选择设施地址",
+      "type": 2,
+      "required": true,
+      "submitKey": "address",
+      "text": {
+        "icon": "ic_location24",
+        "superClick": true
+      }
+    },
+    {
+      "label": "挂牌时间",
+      "value": "currentData",
+      "type": 1,
+      "submitKey": "PlatedTime",
+      "edit": {
+        "enabled": false
+      }
+    },
+    {
+      "label": "责任人",
+      "value": "张山山",
+      "type": 1,
+      "submitKey": "ResponsibleName",
+      "edit": {
+        "enabled": false
+      }
+    },
+    {
+      "label": "备注",
+      "hint": "输入备注",
+      "type": 1,
+      "submitKey": "remark"
+    }
+  ],
+  "flodForm": [
+    {
+      "label": "水压(MPa)",
+      "value": "",
+      "hint": "输入水压",
+      "type": 1,
+      "required": false,
+      "submitKey": "Size",
+      "matchingKey": "Size",
+      "edit": {
+        "inputType": 4,
+        "enabled": true
+      }
+    },
+    {
+      "label": "阀门井",
+      "value": "",
+      "hint": "选择阀门井",
+      "type": 2,
+      "required": false,
+      "submitKey": "ReservedCount1",
+      "matchingKey": "ReservedCount1",
+      "text": {
+        "multiselect": false,
+        "array": [
+          "无",
+          "完好",
+          "破损",
+          "已不能使用"
+        ]
+      }
+    },
+    {
+      "label": "供水单位",
+      "value": "",
+      "hint": "输入供水单位",
+      "type": 1,
+      "required": false,
+      "submitKey": "ReservedText1",
+      "matchingKey": "ReservedText1",
+      "edit": {
+        "inputType": 1,
+        "enabled": true
+      }
+    },
+    {
+      "label": "维保单位",
+      "value": "",
+      "hint": "输入维保单位",
+      "type": 1,
+      "required": false,
+      "submitKey": "OperatingVendorName",
+      "matchingKey": "OperatingVendorName",
+      "edit": {
+        "inputType": 1,
+        "enabled": true
+      }
+    },
+    {
+      "label": "外观情况",
+      "value": "",
+      "hint": "选择外观状态",
+      "type": 2,
+      "required": false,
+      "submitKey": "Appearance",
+      "matchingKey": "Appearance",
+      "text": {
+        "multiselect": false,
+        "key": [
+          "完好",
+          "缺失",
+          "破损"
+        ]
+      }
+    },
+    {
+      "label": "周边情况",
+      "value": "",
+      "hint": "选择周边情况",
+      "type": 2,
+      "required": false,
+      "submitKey": "ReservedText3",
+      "matchingKey": "ReservedText3",
+      "text": {
+        "multiselect": false,
+        "key": [
+          "完好",
+          "破损",
+          "无遮挡",
+          "遮挡"
+        ]
+      }
+    },
+    {
+      "label": "总体情况",
+      "value": "",
+      "hint": "选择总体情况",
+      "type": 2,
+      "required": false,
+      "submitKey": "ReservedCount2",
+      "matchingKey": "ReservedCount2",
+      "text": {
+        "multiselect": false,
+        "key": [
+          "正常",
+          "故障"
+        ]
+      }
+    }
+  ]
+}

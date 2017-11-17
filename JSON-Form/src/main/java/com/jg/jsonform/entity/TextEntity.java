@@ -9,10 +9,13 @@ import java.io.Serializable;
  * <p>
  * Copyright (c) 2017 Shenzhen O&M Cloud Co., Ltd. All rights reserved.
  */
-public class TextEntity implements Serializable{
+public class TextEntity implements Serializable {
 
     /*选择内容*/
-    private String[] array;
+    private String[] key;
+
+    /*序列列后对应的值*/
+    private int[] value;
 
     /*是否多选*/
     private boolean multiselect;
@@ -23,12 +26,13 @@ public class TextEntity implements Serializable{
     /*是否子类继承处理点击选择事件*/
     private boolean superClick;
 
-    public String[] getArray() {
-        return array;
+
+    public String[] getKey() {
+        return key;
     }
 
-    public void setArray(String[] array) {
-        this.array = array;
+    public void setKey(String[] array) {
+        this.key = array;
     }
 
     public boolean isMultiselect() {
@@ -53,5 +57,13 @@ public class TextEntity implements Serializable{
 
     public void setSuperClick(boolean superClick) {
         this.superClick = superClick;
+    }
+
+    public int[] getValue() {
+        return value;
+    }
+
+    public void setValue(int[] value) {
+        this.value = value;
     }
 }

@@ -7,7 +7,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/form_layout_padding">
+        android:paddingBottom="@dimen/form_layout_padding"
+        android:paddingLeft="@dimen/form_layout_padding"
+        android:paddingRight="@dimen/form_layout_padding"
+        android:paddingTop="5dp">
 
         <TextView
             android:id="@+id/Form_SelectionBox_Required"
@@ -17,6 +20,7 @@
             android:textColor="@color/form_required"
             android:textSize="@dimen/form_required_size"
             android:textStyle="bold"
+            android:layout_marginTop="5dp"
             android:visibility="visible" />
 
         <TextView
@@ -24,6 +28,7 @@
             android:layout_width="@dimen/form_label_width"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/Form_SelectionBox_Required"
             android:gravity="center|left"
             android:text="label"

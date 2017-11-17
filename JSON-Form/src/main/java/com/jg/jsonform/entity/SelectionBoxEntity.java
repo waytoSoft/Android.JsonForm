@@ -13,7 +13,7 @@ public class SelectionBoxEntity {
 
     private String name;
 
-    private boolean check;
+    private boolean check=false;
 
     private int key;
 

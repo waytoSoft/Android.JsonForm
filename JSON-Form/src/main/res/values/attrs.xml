@@ -60,4 +60,21 @@
         <attr name="FormSelectionBoxNumColumns" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="PullToRefreshRecyclerView">
+        <attr name="span.Count" format="integer|reference" />
+        <attr name="spac.InPixels" format="integer|reference" />
+        <attr name="recyclerView.PageSize" format="integer|reference" />
+        <attr name="recyclerView.Type" format="enum">
+            <enum name="List" value="10" />
+            <enum name="Grid" value="20" />
+            <enum name="Gallery" value="30" />
+        </attr>
+        <attr name="recyclerView.Mode" format="enum">
+            <enum name="DISABLED" value="0x100" />
+            <enum name="PULL_FROM_START" value="0x200" />
+            <enum name="PULL_FROM_END" value="0x300" />
+            <enum name="BOTH" value="0x400" />
+        </attr>
+    </declare-styleable>
+
 </resources>

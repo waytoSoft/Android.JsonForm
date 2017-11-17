@@ -1,4 +1,4 @@
-package com.jg.jsonform;
+package com.jg.jsonform.utils;
 
 import java.text.SimpleDateFormat;
 

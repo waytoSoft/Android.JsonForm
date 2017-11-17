@@ -1,0 +1,126 @@
+{
+  "form": [
+    {
+      "label": "你的姓名",
+      "hint": "输入姓名",
+      "type": 1,
+      "required": true,
+      "submitKey": "userName"
+    },
+    {
+      "label": "你的性别",
+      "hint": "请选择性别",
+      "type": 2,
+      "required": true,
+      "submitKey": "sex",
+      "text": {
+        "multieselect": false,
+        "key": [
+          "男",
+          "女"
+        ],
+        "value": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "label": "手机号码",
+      "hint": "输入手机号码",
+      "type": 1,
+      "required": true,
+      "submitKey": "phoneNumber",
+      "edit": {
+        "inputType": 2,
+        "regular": "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$"
+      }
+    },
+    {
+      "label": "教育程度",
+      "hint": "请选择教育程度",
+      "type": 2,
+      "required": true,
+      "submitKey": "educationLevel",
+      "text": {
+        "multieselect": false,
+        "key": [
+          "大专/本科",
+          "硕士以上",
+          "中专/高中",
+          "初中以下"
+        ]
+      }
+    },
+    {
+      "label": "证件类型",
+      "value": 1,
+      "type": 3,
+      "required": false,
+      "submitKey": "DocumentType",
+      "selectionBox": [
+        {
+          "name": "身份证",
+          "check": true,
+          "key": 1
+        },
+        {
+          "name": "军官证",
+          "key": 2
+        },
+        {
+          "name": "驾驶证",
+          "key": 3
+        },
+        {
+          "name": "其他",
+          "key": 4
+        }
+      ]
+    },
+    {
+      "label": "证件号码",
+      "hint": "输入证件号码",
+      "type": 1,
+      "required": true,
+      "submitKey": "documentNumber"
+    },
+    {
+      "label": "工作地址",
+      "hint": "输入工作地址",
+      "type": 1,
+      "required": true,
+      "submitKey": "workAddress"
+    },
+    {
+      "label": "公司名称",
+      "hint": "输入公司名称",
+      "type": 1,
+      "required": true,
+      "submitKey": "companyName"
+    },
+    {
+      "label": "公司地址",
+      "hint": "输入公司地址",
+      "type": 1,
+      "required": true,
+      "submitKey": "companyAddress"
+    },
+    {
+      "label": "公司电话",
+      "hint": "输入公司电话",
+      "type": 1,
+      "required": true,
+      "submitKey": "companyPhone",
+      "edit": {
+        "inputType": 2
+      }
+    },
+    {
+      "label": "备注",
+      "hint": "输入备注",
+      "type": 1,
+      "submitKey": "remark"
+    }
+  ]
+}

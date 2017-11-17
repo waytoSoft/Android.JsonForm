@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <com.jg.jsonform.view.ReboundScrollView
         android:id="@+id/form_rendering_scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/form_rendering_ButtomLayout">
+        android:layout_above="@+id/form_rendering_ButtomLayout"
+        android:background="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,6 +16,11 @@
             android:background="@android:color/white"
             android:gravity="center"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/form_line" />
 
             <!--默认显示表单内容-->
             <LinearLayout
@@ -25,6 +30,27 @@
                 android:orientation="vertical">
 
             </LinearLayout>
+
+            <!--图片附件标题-->
+            <TextView
+                android:id="@+id/form_rendering_ImageAttachmentView_Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/defalut_bg"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:text="添加图片"
+                android:textColor="#4D4D4D"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <!--显示图片控件-->
+            <com.jg.jsonform.attachment.ImageAttachmentView
+                android:id="@+id/form_rendering_ImageAttachmentView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <!--查看更多-->
             <TextView
@@ -37,7 +63,7 @@
                 android:text="查看更多"
                 android:textColor="#1296db"
                 android:textSize="14sp"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/form_rendering_more_container"
@@ -46,6 +72,7 @@
                 android:orientation="vertical" />
 
         </LinearLayout>
+
     </com.jg.jsonform.view.ReboundScrollView>
 
     <!--底部View-->

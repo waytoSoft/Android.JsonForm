@@ -1,10 +1,12 @@
-package com.jg.jsonform;
+package com.jg.jsonform.utils;
+
+import android.text.TextUtils;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
 
 /**
- *字符串操作工具类
+ * 字符串操作工具类
  * author:hezhiWu <wuhezhi007@gmail.com>
  * version:V1.0
  * created at 2017/3/31 下午4:49
@@ -50,6 +52,22 @@ public class IStringUtils {
         if (isEmpty(phoneNum))
             return false;
         return phone.matcher(phoneNum).matches();
+    }
+
+    /**
+     * 匹配正则
+     * <p>
+     * author: hezhiWu
+     * created at 2017/11/17 11:14
+     */
+    public static boolean matchingRegular(String str, String regular) {
+        if (TextUtils.isEmpty(str))
+            return false;
+
+        if (TextUtils.isEmpty(regular))
+            return false;
+
+        return Pattern.compile(regular).matcher(str).matches();
     }
 
     /**
@@ -169,26 +187,26 @@ public class IStringUtils {
     }
 
     /**
-     *byte 转 int
-     * 
-     *author: hezhiWu
-     *created at 2017/4/13 17:47
+     * byte 转 int
+     * <p>
+     * author: hezhiWu
+     * created at 2017/4/13 17:47
      */
     public static int byteArrayToInt(byte[] b) {
-        return   b[3] & 0xFF |
+        return b[3] & 0xFF |
                 (b[2] & 0xFF) << 8 |
                 (b[1] & 0xFF) << 16 |
                 (b[0] & 0xFF) << 24;
     }
 
     /**
-     *int 转 byte
-     * 
-     *author: hezhiWu
-     *created at 2017/4/13 17:48
+     * int 转 byte
+     * <p>
+     * author: hezhiWu
+     * created at 2017/4/13 17:48
      */
     public static byte[] intToByteArray(int a) {
-        return new byte[] {
+        return new byte[]{
                 (byte) ((a >> 24) & 0xFF),
                 (byte) ((a >> 16) & 0xFF),
                 (byte) ((a >> 8) & 0xFF),

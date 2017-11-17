@@ -15,10 +15,13 @@ public class EditEntity implements Serializable {
     private int inputType;
 
     /*是否可编辑*/
-    private boolean enabled;
+    private boolean enabled = true;
 
     /*右边图标*/
     private String icon;
+
+    /*正式表单式*/
+    private String regular;
 
     public int getInputType() {
         return inputType;
@@ -42,5 +45,13 @@ public class EditEntity implements Serializable {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getRegular() {
+        return regular;
+    }
+
+    public void setRegular(String regular) {
+        this.regular = regular;
     }
 }

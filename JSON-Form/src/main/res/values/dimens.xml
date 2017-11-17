@@ -11,5 +11,6 @@
     <dimen name="form_text_marginRight">10dp</dimen>
     <dimen name="form_line_marginLeft">15dp</dimen>
 
+    <dimen name="progress_foot">30dp</dimen>
 
 </resources>

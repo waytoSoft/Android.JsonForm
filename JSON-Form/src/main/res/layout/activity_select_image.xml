@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="选择图片"
+        app:titleTextColor="#FFF">
+
+        <TextView
+            android:id="@+id/Title_total"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:padding="15dp"
+            android:textColor="#FFF"
+            android:textSize="18sp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <com.jg.jsonform.view.recyclerview.PullToRefreshRecyclerView
+        android:id="@+id/RecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="3dp"
+        app:recyclerView.Mode="BOTH"
+        app:recyclerView.PageSize="200"
+        app:recyclerView.Type="Grid"
+        app:spac.InPixels="6"
+        app:span.Count="3" />
+
+</LinearLayout>

@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="defalut_bg">#EBEBEB</color>
+
     <color name="form_label">#666666</color>
     <color name="form_hint">#999</color>
     <color name="form_text">#000</color>
