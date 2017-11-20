@@ -3,6 +3,7 @@
 #### 目前支持输入表单、选择表单、CheckBox表单
 
 ### 项目效果图
+
 <div class="tutorial-mock">
   <img src="./i1.png" />
   <img src="./i2.png" />
