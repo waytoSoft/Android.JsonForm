@@ -4,7 +4,7 @@
 
 ### 项目效果图
 <div class="tutorial-mock">
-  <img src="./i1.jpg" />
-  <img src="./i2.jpg" />
-  <img src="./i3.jpg" />
+  <img src="./i1.png" />
+  <img src="./i2.png" />
+  <img src="./i3.png" />
 </div>
