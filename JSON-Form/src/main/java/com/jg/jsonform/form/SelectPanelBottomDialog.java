@@ -1,4 +1,4 @@
-package com.jg.jsonform;
+package com.jg.jsonform.form;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.jg.jsonform.R;
 import com.jg.jsonform.view.ArrayListAdapter;
 
 import java.util.List;
@@ -34,7 +35,9 @@ public class SelectPanelBottomDialog {
     private String selectContent;
     private String[] selectContents;
 
+
     private BottomSheetDialog bottomSheetDialog;
+
 
     public SelectPanelBottomDialog(Activity activity) {
         this.mActivity = activity;
@@ -84,6 +87,17 @@ public class SelectPanelBottomDialog {
      */
     public SelectPanelBottomDialog setTextView(TextView textView) {
         this.textView = textView;
+        return this;
+    }
+
+    /**
+     * 设置默认值
+     * <p>
+     * author: hezhiWu
+     * created at 2017/11/18 下午11:51
+     */
+    public SelectPanelBottomDialog setDefalutContent(String content) {
+        selectContent = content;
         return this;
     }
 
@@ -168,7 +182,8 @@ public class SelectPanelBottomDialog {
 
             final CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.Panel_CheckBox);
             checkBox.setText(mList.get(position));
-            if (selectPosition == position) {
+            if (selectPosition == position
+                    || (!TextUtils.isEmpty(selectContent) && selectContent.equals(mList.get(position)))) {
                 checkBox.setChecked(true);
             } else {
                 checkBox.setChecked(false);

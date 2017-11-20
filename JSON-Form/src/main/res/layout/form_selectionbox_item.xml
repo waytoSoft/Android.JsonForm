@@ -10,15 +10,14 @@
         android:layout_centerInParent="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:paddingTop="4dp"
+        android:paddingBottom="6dp">
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/SelectionBox_Item_Radio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/radionbutton_selector"
-            android:button="@null" />
+            android:button="@drawable/radionbutton_selector" />
 
         <TextView
             android:id="@+id/SelectionBox_Item_Name"

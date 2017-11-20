@@ -152,7 +152,7 @@ public class FormTextView extends LinearLayout {
      * @param text
      */
     public FormTextView setFormText(String text) {
-        if (TextUtils.isEmpty(text))
+        if (!TextUtils.isEmpty(text))
             mContentTextView.setText(text);
 
         return this;
@@ -268,6 +268,17 @@ public class FormTextView extends LinearLayout {
             mDrawableRight.setVisibility(View.VISIBLE);
         }
 
+        return this;
+    }
+    
+    /**
+     *设置Enable
+     * 
+     *author: hezhiWu
+     *created at 2017/11/18 下午11:58
+     */
+    public FormTextView setFormEnable(boolean enable){
+        mContentTextView.setEnabled(enable);
         return this;
     }
 

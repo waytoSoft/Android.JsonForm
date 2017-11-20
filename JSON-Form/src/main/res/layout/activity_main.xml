@@ -22,5 +22,12 @@
         android:id="@+id/edit_asset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="带附件表单" />
+        android:text="填报带附件表单" />
+
+    <Button
+        android:id="@+id/show_attachment_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="查看带附件表单" />
+
 </LinearLayout>

@@ -1,12 +1,12 @@
-package com.jg.jsonform.form.fragment;
+package com.jg.jsonform.form.fragment.pure;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.jg.jsonform.R;
-import com.jg.jsonform.form.FormRenderingFragment;
-import com.jg.jsonform.utils.IUtil;
 
 /**
  * 表单
@@ -17,11 +17,13 @@ import com.jg.jsonform.utils.IUtil;
  * <p>
  * Copyright (c) 2017 Shenzhen O&M Cloud Co., Ltd. All rights reserved.
  */
-public class FormPureFragment extends FormRenderingFragment {
+public class FormPureEditFragment extends FormPureBaseFragment {
+
 
     @Override
-    public String getJsonForm() {
-        return IUtil.getJson("formpure.json", getActivity());
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        renderingFormData(resultJson,true);
     }
 
     @Override
@@ -31,9 +33,10 @@ public class FormPureFragment extends FormRenderingFragment {
             @Override
             public void onClick(View v) {
                 if (getFormVale() != null)
-                    Log.d("FormPureFragment", getFormVale().toString());
+                    Log.d("FormPureFillFragment", getFormVale().toString());
             }
         });
         return bottomView;
     }
+
 }

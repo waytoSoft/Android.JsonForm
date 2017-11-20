@@ -1,6 +1,7 @@
 package com.jg.jsonform.form;
 
-import com.jg.jsonform.form.fragment.FormAttachmentFragment;
+import com.jg.jsonform.form.fragment.FormAttachmentFillFragment;
+import com.jg.jsonform.form.fragment.FormAttachmentShowlFragment;
 
 /**
  * 带附件表单
@@ -15,7 +16,13 @@ public class FormAttachmentActivity extends FormActivity {
 
     @Override
     protected FormRenderingFragment getFormFragment() {
-        return new FormAttachmentFragment();
+        int flag = getIntent().getIntExtra("flag", 1);
+        if (flag == 1) {
+            return new FormAttachmentFillFragment();
+        } else if (flag == 2) {
+            return new FormAttachmentShowlFragment();
+        } else
+            return new FormAttachmentFillFragment();
     }
 
     @Override

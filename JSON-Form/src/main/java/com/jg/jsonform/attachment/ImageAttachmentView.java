@@ -267,6 +267,13 @@ public class ImageAttachmentView extends LinearLayout implements AdapterView.OnI
         adapter.appendToList(entities);
     }
 
+    public void setShowImage(String url) {
+        PictureEntity entity = new PictureEntity();
+        entity.setNewUrl(url);
+        setShowImage();
+        adapter.appendToList(entity);
+    }
+
     /**
      * 设置显示图片
      * <p>
@@ -311,11 +318,7 @@ public class ImageAttachmentView extends LinearLayout implements AdapterView.OnI
      *
      * @param url
      */
-    public void setShowImage(String url) {
-        PictureEntity entity = new PictureEntity();
-        entity.setNewUrl(url);
-        adapter.appendToList(entity);
-    }
+
 
     private void setShowImage() {
         adapter.setShowCloseIcon(false);

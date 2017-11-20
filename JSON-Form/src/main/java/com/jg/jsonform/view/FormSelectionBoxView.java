@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jg.jsonform.R;
+import com.jg.jsonform.entity.EditEntity;
 import com.jg.jsonform.entity.FormEntity;
 import com.jg.jsonform.entity.SelectionBoxEntity;
+import com.jg.jsonform.form.FormConstacts;
+import com.jg.jsonform.utils.IStringUtils;
 
 import org.json.JSONObject;
 
@@ -185,7 +188,7 @@ public class FormSelectionBoxView extends LinearLayout {
      */
     public FormSelectionBoxView setSelectionBoxContent(FormEntity entity) {
         this.formEntity = entity;
-        defalutValue = Integer.parseInt(entity.getValue());
+        defalutValue = IStringUtils.toInt(entity.getValue());
         adapter.appendToList(entity.getSelectionBox());
         return this;
     }
@@ -198,6 +201,20 @@ public class FormSelectionBoxView extends LinearLayout {
      */
     public FormSelectionBoxView setOnCheckedChangeListener(OnCheckedChangeListener listener) {
         this.listener = listener;
+        return this;
+    }
+    
+    /**
+     *设置值
+     * 
+     *author: hezhiWu
+     *created at 2017/11/18 下午11:45
+     */
+    public FormSelectionBoxView setValue(int value){
+        defalutValue=value;
+        adapter.notifyDataSetChanged();
+
+        enabled=false;
         return this;
     }
 
@@ -241,9 +258,30 @@ public class FormSelectionBoxView extends LinearLayout {
         this.enabled = enabled;
         try {
             JSONObject jsonObject = new JSONObject(formJson);
-            defalutValue = Integer.parseInt(jsonObject.getString("Status"));
+            defalutValue = Integer.parseInt(jsonObject.getString("status"));
             adapter.notifyDataSetChanged();
             init();
+
+            FormEntity formEntity = new Gson().fromJson(formJson, FormEntity.class);
+
+            for (int i = 0; i < mContainer.getChildCount(); i++) {
+                View view = mContainer.getChildAt(i);
+                int type = IStringUtils.toInt(view.getTag(R.id.form_type).toString());
+
+                if (type == FormConstacts.FormType.Edit.getValue()) {
+
+                    FormEditView writeView = (FormEditView) view;
+
+                    renderingEditViewData(writeView, formEntity, formEntity.getValue(), enabled);
+
+                } else if (type == FormConstacts.FormType.Text.getValue()) {
+
+                    FormTextView selectView = (FormTextView) view;
+
+                    renderingTextViewData(selectView, formEntity, formEntity.getValue(), enabled);
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -271,6 +309,56 @@ public class FormSelectionBoxView extends LinearLayout {
         }
     }
 
+    private void renderingEditViewData(FormEditView writeView, FormEntity formEntity, String value, boolean enabled) {
+         /*判断处理原始表单配制编辑状态*/
+        EditEntity editEntity = formEntity.getEdit();
+        if (editEntity != null && !editEntity.isEnabled()) {
+            if (enabled) {
+                writeView.setFormEnabled(editEntity.isEnabled());
+            }
+        } else {
+            writeView.setFormEnabled(enabled);
+        }
+
+        if (!enabled) {
+            writeView.setFormRightVisibility(View.GONE);
+        }
+
+        if (enabled) {
+            writeView.setFormRequired(formEntity.isRequired());
+        } else {
+            writeView.setFormRequired(false);
+        }
+
+        if (!TextUtils.isEmpty(value) && !"null".equals(value)) {
+            writeView.setFormText(value);
+        } else {
+            writeView.setFormHint(R.string.nothing);
+        }
+    }
+
+
+    private void renderingTextViewData(FormTextView selectView, FormEntity formEntity, String value, boolean enabled) {
+        if (!enabled) {
+            selectView.setFormRightDrawableVisibility(View.GONE);
+        }
+
+        if (enabled) {
+            selectView.setFormRequired(formEntity.isRequired());
+        } else {
+            selectView.setFormRequired(false);
+        }
+
+        selectView.setFormEnable(enabled);
+
+
+        if (!TextUtils.isEmpty(value) && !"null".equals(value)) {
+            selectView.setFormText(value);
+        } else {
+            selectView.setFormHint(R.string.nothing);
+        }
+    }
+
     /**
      * 适配器
      * <p>
@@ -288,34 +376,39 @@ public class FormSelectionBoxView extends LinearLayout {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            ViewHolder viewHolder = null;
-            if (convertView == null) {
-                viewHolder = new ViewHolder();
+            ViewHolder viewHolder = new ViewHolder();
 
-                convertView = inflate(mContext, R.layout.form_selectionbox_item, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.form_selectionbox_item, null);
 
-                viewHolder.radioButton = (RadioButton) convertView.findViewById(R.id.SelectionBox_Item_Radio);
-                viewHolder.layout = (LinearLayout) convertView.findViewById(R.id.SelectionBox_Item_Layout);
-                viewHolder.textView = (TextView) convertView.findViewById(R.id.SelectionBox_Item_Name);
-
-                convertView.setTag(viewHolder);
-            } else {
-                viewHolder = (ViewHolder) convertView.getTag();
-            }
+            viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.SelectionBox_Item_Radio);
+            viewHolder.layout = (LinearLayout) convertView.findViewById(R.id.SelectionBox_Item_Layout);
+            viewHolder.textView = (TextView) convertView.findViewById(R.id.SelectionBox_Item_Name);
 
             viewHolder.textView.setText(mList.get(position).getName());
 
             if (mList.get(position).getKey() == defalutValue) {
-                viewHolder.radioButton.setChecked(true);
+                viewHolder.checkBox.setChecked(true);
                 mList.get(position).setCheck(true);
             } else {
-                viewHolder.radioButton.setChecked(false);
+                viewHolder.checkBox.setChecked(false);
                 mList.get(position).setCheck(false);
             }
 
-            viewHolder.radioButton.setEnabled(enabled);
             viewHolder.layout.setEnabled(enabled);
+            viewHolder.checkBox.setEnabled(enabled);
 
+            viewHolder.checkBox.setOnCheckedChangeListener(null);
+            viewHolder.checkBox.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defalutValue = mList.get(position).getKey();
+                    notifyDataSetChanged();
+
+                    if (listener != null) {
+                        listener.onCheckedChange(mContainer, mList.get(position).getForm());
+                    }
+                }
+            });
             viewHolder.layout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -332,7 +425,7 @@ public class FormSelectionBoxView extends LinearLayout {
         }
 
         class ViewHolder {
-            RadioButton radioButton;
+            CheckBox checkBox;
             LinearLayout layout;
             TextView textView;
         }

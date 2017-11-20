@@ -1,0 +1,93 @@
+{
+  "img": true,
+  "imgRequired": true,
+  "form": [
+    {
+      "label": "设施编号",
+      "value": "Asset001",
+      "type": 1,
+      "submitKey": "assetNo",
+      "matchingKey":"assetNo",
+      "edit": {
+        "enabled": false
+      }
+    },
+    {
+      "label": "工作地址",
+      "value": "广东省深圳北站东广场3号",
+      "type": 1,
+      "submitKey": "workAddress",
+      "matchingKey":"workAddress",
+      "edit": {
+        "enabled": false
+      }
+    },
+    {
+      "label": "设施状态",
+      "type": 3,
+      "submitKey": "status",
+      "matchingKey":"status",
+      "selectionBox": [
+        {
+          "name": "正常",
+          "check": true,
+          "key": 0
+        },
+        {
+          "name": "故障",
+          "key": 1,
+          "form": [
+            {
+              "label": "故障部位",
+              "hint": "选择故障部位",
+              "type": 2,
+              "required": true,
+              "submitKey": "poistion",
+              "text": {
+                "key": [
+                  "部位一",
+                  "部位二",
+                  "部位三",
+                  "部位四"
+                ]
+              }
+            },
+            {
+              "label": "故障原因",
+              "hint": "输入故障原因",
+              "type": 1,
+              "required": true,
+              "submitKey": "reason"
+            }
+          ]
+        },
+        {
+          "name": "备案",
+          "key": 2,
+          "form": [
+            {
+              "label": "备案原因",
+              "hint": "输入备案原因",
+              "type": 1,
+              "required": true,
+              "submitKey": "bReason"
+            }
+          ]
+        },
+        {
+          "name": "拆除",
+          "key": 3,
+          "form": [
+            {
+              "label": "拆除原因",
+              "hint": "输入拆除原因",
+              "type": 1,
+              "required": true,
+              "submitKey": "disReason"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

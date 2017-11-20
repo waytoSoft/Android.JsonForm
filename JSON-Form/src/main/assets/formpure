@@ -5,7 +5,8 @@
       "hint": "输入姓名",
       "type": 1,
       "required": true,
-      "submitKey": "userName"
+      "submitKey": "userName",
+      "matchingKey":"userName"
     },
     {
       "label": "你的性别",
@@ -13,6 +14,7 @@
       "type": 2,
       "required": true,
       "submitKey": "sex",
+      "matchingKey":"sex",
       "text": {
         "multieselect": false,
         "key": [
@@ -31,6 +33,7 @@
       "type": 1,
       "required": true,
       "submitKey": "phoneNumber",
+      "matchingKey":"phoneNumber",
       "edit": {
         "inputType": 2,
         "regular": "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$"
@@ -42,6 +45,7 @@
       "type": 2,
       "required": true,
       "submitKey": "educationLevel",
+      "matchingKey":"educationLevel",
       "text": {
         "multieselect": false,
         "key": [
@@ -57,7 +61,8 @@
       "value": 1,
       "type": 3,
       "required": false,
-      "submitKey": "DocumentType",
+      "submitKey": "documentType",
+      "matchingKey":"documentType",
       "selectionBox": [
         {
           "name": "身份证",
@@ -83,28 +88,32 @@
       "hint": "输入证件号码",
       "type": 1,
       "required": true,
-      "submitKey": "documentNumber"
+      "submitKey": "documentNumber",
+      "matchingKey":"documentNumber"
     },
     {
       "label": "工作地址",
       "hint": "输入工作地址",
       "type": 1,
       "required": true,
-      "submitKey": "workAddress"
+      "submitKey": "workAddress",
+      "matchingKey":"workAddress"
     },
     {
       "label": "公司名称",
       "hint": "输入公司名称",
       "type": 1,
       "required": true,
-      "submitKey": "companyName"
+      "submitKey": "companyName",
+      "matchingKey":"companyName"
     },
     {
       "label": "公司地址",
       "hint": "输入公司地址",
       "type": 1,
       "required": true,
-      "submitKey": "companyAddress"
+      "submitKey": "companyAddress",
+      "matchingKey":"companyAddress"
     },
     {
       "label": "公司电话",
@@ -112,6 +121,7 @@
       "type": 1,
       "required": true,
       "submitKey": "companyPhone",
+      "matchingKey":"companyPhone",
       "edit": {
         "inputType": 2
       }
@@ -120,7 +130,8 @@
       "label": "备注",
       "hint": "输入备注",
       "type": 1,
-      "submitKey": "remark"
+      "submitKey": "remark",
+      "matchingKey":"remark"
     }
   ]
 }

@@ -1,4 +1,4 @@
-package com.jg.jsonform;
+package com.jg.jsonform.form;
 
 /**
  * author: hezhiWu <hezhi.woo@gmail.com>

@@ -16,9 +16,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.jg.jsonform.FormConstacts;
 import com.jg.jsonform.R;
-import com.jg.jsonform.SelectPanelBottomDialog;
 import com.jg.jsonform.attachment.ImageAttachmentView;
 import com.jg.jsonform.entity.EditEntity;
 import com.jg.jsonform.entity.FormEntity;
@@ -321,8 +319,8 @@ public abstract class FormRenderingFragment extends Fragment {
                                 .setMultieselect(false)
                                 .setContent(textEntity.getKey())
                                 .setTextView(selectView.getFormTextView())
+                                .setDefalutContent(selectView.getFormText())
                                 .show();
-//                        Toast.makeText(getActivity(),"Please SuperClick",Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -455,7 +453,7 @@ public abstract class FormRenderingFragment extends Fragment {
         try {
             JSONObject jsonObject = new JSONObject(formJson);
             /*处理附件*/
-            if (!isFlod) {
+            if (!isFlod && jsonObject.toString().contains("Attachments")) {
                 String attachmentJson = jsonObject.getString("Attachments");
                 List<String> attachments = new Gson().fromJson(attachmentJson, new TypeToken<ArrayList<String>>() {
                 }.getType());
@@ -466,7 +464,7 @@ public abstract class FormRenderingFragment extends Fragment {
             for (int i = 0; i < count; i++) {
                 View view = layout.getChildAt(i);
 
-                int type = IStringUtils.toInt(view.getTag(R.id.form_rendering_container).toString());
+                int type = IStringUtils.toInt(view.getTag(R.id.form_type).toString());
                 FormEntity formEntity = new Gson().fromJson(view.getTag().toString(), FormEntity.class);
 
                 if (formEntity == null) {
@@ -488,6 +486,11 @@ public abstract class FormRenderingFragment extends Fragment {
                     FormTextView selectView = (FormTextView) view;
 
                     renderingTextViewData(selectView, formEntity, value, enabled);
+
+                }else if (type==FormConstacts.FormType.SelectionBox.getValue()){
+                    FormSelectionBoxView selectionBoxView =(FormSelectionBoxView)view;
+
+                    selectionBoxView.renderingView(formJson,enabled);
                 }
             }
         } catch (Exception e) {
@@ -555,6 +558,8 @@ public abstract class FormRenderingFragment extends Fragment {
         } else {
             selectView.setFormRequired(false);
         }
+
+        selectView.setFormEnable(enabled);
 
 
         if (!TextUtils.isEmpty(value) && !"null".equals(value)) {

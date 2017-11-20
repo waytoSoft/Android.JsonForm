@@ -10,4 +10,11 @@
     <string name="loading_more">加载更多</string>
 
     <string name="image_title">添加图片</string>
+
+    <array name="asset_type">
+        <item>市政</item>
+        <item>小区</item>
+        <item>小区管网</item>
+        <item>其他</item>
+    </array>
 </resources>

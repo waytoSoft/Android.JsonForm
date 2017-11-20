@@ -98,7 +98,7 @@
       "matchingKey": "ReservedCount1",
       "text": {
         "multiselect": false,
-        "array": [
+        "key": [
           "无",
           "完好",
           "破损",

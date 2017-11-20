@@ -12,10 +12,10 @@ import com.jg.jsonform.utils.IUtil;
  * <p>
  * Copyright (c) 2017 Shenzhen O&M Cloud Co., Ltd. All rights reserved.
  */
-public class FormAttachmentFragment extends FormRenderingFragment {
+public class FormAttachmentFillFragment extends FormRenderingFragment {
 
     @Override
     public String getJsonForm() {
-        return IUtil.getJson("formattachment", getActivity());
+        return IUtil.getJson("attachment", getActivity());
     }
 }

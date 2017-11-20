@@ -160,13 +160,15 @@ public class FormEditView extends LinearLayout {
      * @param text
      */
     public FormEditView setFormText(String text) {
-        if (!TextUtils.isEmpty(text))
+        if (!TextUtils.isEmpty(text)) {
             mContentEditText.setText(text);
+            mEmptyTextView.setText(text);
+        }
 
-        if (!TextUtils.isEmpty(mContentEditText.getText().toString().trim()) || mContentEditText.getVisibility() == View.GONE) {
+        if (!TextUtils.isEmpty(mContentEditText.getText().toString().trim())
+                || mContentEditText.getVisibility() == View.GONE) {
             mContentEditText.setVisibility(View.VISIBLE);
             mEmptyTextView.setVisibility(View.GONE);
-
         }
 
         return this;
@@ -181,8 +183,10 @@ public class FormEditView extends LinearLayout {
      * @param resId
      */
     public FormEditView setFormText(int resId) {
-        if (resId > 0)
+        if (resId > 0) {
             mContentEditText.setText(resId);
+            mContentEditText.setText(resId);
+        }
 
         if (!TextUtils.isEmpty(mContentEditText.getText().toString().trim()) || mContentEditText.getVisibility() == View.GONE) {
             mContentEditText.setVisibility(View.VISIBLE);
