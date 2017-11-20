@@ -16,6 +16,10 @@ public class StructureEntity implements Serializable {
 
     public boolean imgRequired;
 
+    private String submitKey;
+
+    private String matchingKey;
+
     public List<FormEntity> form;
 
     public List<FormEntity> flodForm;
@@ -26,6 +30,22 @@ public class StructureEntity implements Serializable {
 
     public void setImg(boolean img) {
         this.img = img;
+    }
+
+    public String getSubmitKey() {
+        return submitKey;
+    }
+
+    public void setSubmitKey(String submitKey) {
+        this.submitKey = submitKey;
+    }
+
+    public String getMatchingKey() {
+        return matchingKey;
+    }
+
+    public void setMatchingKey(String matchingKey) {
+        this.matchingKey = matchingKey;
     }
 
     public List<FormEntity> getForm() {

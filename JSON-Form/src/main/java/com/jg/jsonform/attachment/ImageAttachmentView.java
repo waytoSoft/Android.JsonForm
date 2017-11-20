@@ -134,12 +134,13 @@ public class ImageAttachmentView extends LinearLayout implements AdapterView.OnI
      */
     public void setImageList(String path) {
         PictureEntity entity = new PictureEntity();
-        entity.setUrl(path);
+        entity.setNewUrl(path);
         if ("photo".equals(path) && !TextUtils.isEmpty(photoPath)) {
             adapter.appendPositionToList(0, entity);
         } else {
             adapter.appendPositionToList(0, entity);
         }
+        adapter.setShowCloseIcon(true);
         if (adapter.getList().size() > DEFAULT_PICTURE_NUMBER) {
             adapter.removePos(adapter.getList().size() - 1);
             return;
@@ -193,8 +194,8 @@ public class ImageAttachmentView extends LinearLayout implements AdapterView.OnI
      */
 //    public void setImageListToAttachment(List<Attachment> attachments) {
 //        if (attachments != null && attachments.size() > 0) {
-//            for (Attachment attachment : attachments) {
-//                setImageListToAttachment(attachment);
+//            for (Attachment attachment.json : attachments) {
+//                setImageListToAttachment(attachment.json);
 //            }
 //        }
 //    }
@@ -205,9 +206,9 @@ public class ImageAttachmentView extends LinearLayout implements AdapterView.OnI
      * author: hezhiWu
      * created at 2017/4/9 19:01
      */
-//    public void setImageListToAttachment(Attachment attachment) {
+//    public void setImageListToAttachment(Attachment attachment.json) {
 //        PictureEntity entity = new PictureEntity();
-//        entity.setNewUrl(attachment.getUrl());
+//        entity.setNewUrl(attachment.json.getUrl());
 //        adapter.appendPositionToList(0, entity);
 //        adapter.setShowCloseIcon(true);
 //    }
@@ -283,8 +284,8 @@ public class ImageAttachmentView extends LinearLayout implements AdapterView.OnI
 //    public void setShowImageListToAttachment(List<Attachment> attachments) {
 //        if (attachments != null && attachments.size() > 0) {
 //            List<String> list = new ArrayList<>();
-//            for (Attachment attachment : attachments) {
-//                list.add(attachment.getUrl());
+//            for (Attachment attachment.json : attachments) {
+//                list.add(attachment.json.getUrl());
 //            }
 //            setShowImageList(list);
 //        } else {
@@ -299,10 +300,10 @@ public class ImageAttachmentView extends LinearLayout implements AdapterView.OnI
      * author: hezhiWu
      * created at 2017/10/26 18:32
      */
-//    public void setShowImageListToAttachment(Attachment attachment) {
-//        if (attachment != null) {
+//    public void setShowImageListToAttachment(Attachment attachment.json) {
+//        if (attachment.json != null) {
 //            List<String> list = new ArrayList<>();
-//            list.add(attachment.getUrl());
+//            list.add(attachment.json.getUrl());
 //            setShowImageList(list);
 //        } else {
 //            emptyTextView.setVisibility(VISIBLE);

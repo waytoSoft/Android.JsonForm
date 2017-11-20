@@ -43,14 +43,14 @@
                 android:text="添加图片"
                 android:textColor="#4D4D4D"
                 android:textSize="14sp"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <!--显示图片控件-->
             <com.jg.jsonform.attachment.ImageAttachmentView
                 android:id="@+id/form_rendering_ImageAttachmentView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
             <!--查看更多-->
             <TextView

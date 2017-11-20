@@ -1,6 +1,6 @@
 package com.jg.jsonform.asset;
 
-import com.jg.jsonform.form.FormRenderingFragment;
+import com.jg.jsonform.form.fragment.FormRenderingFragment;
 import com.jg.jsonform.utils.IUtil;
 
 /**

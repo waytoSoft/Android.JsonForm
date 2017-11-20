@@ -203,18 +203,18 @@ public class FormSelectionBoxView extends LinearLayout {
         this.listener = listener;
         return this;
     }
-    
+
     /**
-     *设置值
-     * 
-     *author: hezhiWu
-     *created at 2017/11/18 下午11:45
+     * 设置值
+     * <p>
+     * author: hezhiWu
+     * created at 2017/11/18 下午11:45
      */
-    public FormSelectionBoxView setValue(int value){
-        defalutValue=value;
+    public FormSelectionBoxView setValue(int value) {
+        defalutValue = value;
         adapter.notifyDataSetChanged();
 
-        enabled=false;
+        enabled = false;
         return this;
     }
 
@@ -253,35 +253,21 @@ public class FormSelectionBoxView extends LinearLayout {
      * <p>
      * author: hezhiWu
      * created at 2017/11/1 15:58
+     *
+     * @param formJson 表单Json
+     * @param enabled
      */
     public void renderingView(String formJson, boolean enabled) {
         this.enabled = enabled;
         try {
+            FormEntity formEntity = new Gson().fromJson(getTag().toString(), FormEntity.class);
             JSONObject jsonObject = new JSONObject(formJson);
-            defalutValue = Integer.parseInt(jsonObject.getString("status"));
+            if (formEntity != null)
+                defalutValue = Integer.parseInt(jsonObject.getString(formEntity.getMatchingKey()));
+
             adapter.notifyDataSetChanged();
+
             init();
-
-            FormEntity formEntity = new Gson().fromJson(formJson, FormEntity.class);
-
-            for (int i = 0; i < mContainer.getChildCount(); i++) {
-                View view = mContainer.getChildAt(i);
-                int type = IStringUtils.toInt(view.getTag(R.id.form_type).toString());
-
-                if (type == FormConstacts.FormType.Edit.getValue()) {
-
-                    FormEditView writeView = (FormEditView) view;
-
-                    renderingEditViewData(writeView, formEntity, formEntity.getValue(), enabled);
-
-                } else if (type == FormConstacts.FormType.Text.getValue()) {
-
-                    FormTextView selectView = (FormTextView) view;
-
-                    renderingTextViewData(selectView, formEntity, formEntity.getValue(), enabled);
-                }
-            }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -306,56 +292,6 @@ public class FormSelectionBoxView extends LinearLayout {
                 mContainer.removeAllViews();
                 listener.onCheckedChange(mContainer, entity.getForm());
             }
-        }
-    }
-
-    private void renderingEditViewData(FormEditView writeView, FormEntity formEntity, String value, boolean enabled) {
-         /*判断处理原始表单配制编辑状态*/
-        EditEntity editEntity = formEntity.getEdit();
-        if (editEntity != null && !editEntity.isEnabled()) {
-            if (enabled) {
-                writeView.setFormEnabled(editEntity.isEnabled());
-            }
-        } else {
-            writeView.setFormEnabled(enabled);
-        }
-
-        if (!enabled) {
-            writeView.setFormRightVisibility(View.GONE);
-        }
-
-        if (enabled) {
-            writeView.setFormRequired(formEntity.isRequired());
-        } else {
-            writeView.setFormRequired(false);
-        }
-
-        if (!TextUtils.isEmpty(value) && !"null".equals(value)) {
-            writeView.setFormText(value);
-        } else {
-            writeView.setFormHint(R.string.nothing);
-        }
-    }
-
-
-    private void renderingTextViewData(FormTextView selectView, FormEntity formEntity, String value, boolean enabled) {
-        if (!enabled) {
-            selectView.setFormRightDrawableVisibility(View.GONE);
-        }
-
-        if (enabled) {
-            selectView.setFormRequired(formEntity.isRequired());
-        } else {
-            selectView.setFormRequired(false);
-        }
-
-        selectView.setFormEnable(enabled);
-
-
-        if (!TextUtils.isEmpty(value) && !"null".equals(value)) {
-            selectView.setFormText(value);
-        } else {
-            selectView.setFormHint(R.string.nothing);
         }
     }
 

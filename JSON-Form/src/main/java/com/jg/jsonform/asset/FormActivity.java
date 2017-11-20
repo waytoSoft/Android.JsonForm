@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.jg.jsonform.form.FormRenderingFragment;
+import com.jg.jsonform.form.fragment.FormRenderingFragment;
 import com.jg.jsonform.R;
 
 /**

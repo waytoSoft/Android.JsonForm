@@ -5,9 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.jg.jsonform.form.FormAttachmentActivity;
-import com.jg.jsonform.form.FormPureMatchingActivity;
-import com.jg.jsonform.form.FromFoldActivity;
+import com.jg.jsonform.form.FormAttachmentMatchingActivity;
+import com.jg.jsonform.form.FormFoldMatchingActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.show_asset).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,FromFoldActivity.class);
+                Intent intent=new Intent(MainActivity.this,FormFoldActivity.class);
                 startActivity(intent);
             }
         });
@@ -35,16 +34,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,FormAttachmentActivity.class);
-                intent.putExtra("flag",1);
-                startActivity(intent);
-            }
-        });
-
-        findViewById(R.id.show_attachment_form).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,FormAttachmentActivity.class);
-                intent.putExtra("flag",2);
                 startActivity(intent);
             }
         });

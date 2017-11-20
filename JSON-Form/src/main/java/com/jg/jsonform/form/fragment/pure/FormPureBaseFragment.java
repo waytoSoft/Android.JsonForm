@@ -1,6 +1,6 @@
 package com.jg.jsonform.form.fragment.pure;
 
-import com.jg.jsonform.form.FormRenderingFragment;
+import com.jg.jsonform.form.fragment.FormRenderingFragment;
 import com.jg.jsonform.utils.IUtil;
 
 /**
@@ -29,6 +29,6 @@ public class FormPureBaseFragment extends FormRenderingFragment {
 
     @Override
     public String getJsonForm() {
-        return IUtil.getJson("formpure", getActivity());
+        return IUtil.getJson("formpure.json", getActivity());
     }
 }

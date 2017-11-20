@@ -1,13 +1,15 @@
 {
   "img": true,
   "imgRequired": true,
+  "submitKey": "Attachments",
+  "matchingKey": "Attachments",
   "form": [
     {
       "label": "设施编号",
       "value": "Asset001",
       "type": 1,
       "submitKey": "assetNo",
-      "matchingKey":"assetNo",
+      "matchingKey": "assetNo",
       "edit": {
         "enabled": false
       }
@@ -17,7 +19,7 @@
       "value": "广东省深圳北站东广场3号",
       "type": 1,
       "submitKey": "workAddress",
-      "matchingKey":"workAddress",
+      "matchingKey": "workAddress",
       "edit": {
         "enabled": false
       }
@@ -26,7 +28,7 @@
       "label": "设施状态",
       "type": 3,
       "submitKey": "status",
-      "matchingKey":"status",
+      "matchingKey": "status",
       "selectionBox": [
         {
           "name": "正常",
@@ -43,12 +45,13 @@
               "type": 2,
               "required": true,
               "submitKey": "poistion",
+              "matchingKey": "position",
               "text": {
                 "key": [
-                  "部位一",
-                  "部位二",
-                  "部位三",
-                  "部位四"
+                  "故障部位一",
+                  "故障部位二",
+                  "故障部位三",
+                  "故障部位四"
                 ]
               }
             },
@@ -57,7 +60,8 @@
               "hint": "输入故障原因",
               "type": 1,
               "required": true,
-              "submitKey": "reason"
+              "submitKey": "reason",
+              "matchingKey": "reason"
             }
           ]
         },
@@ -70,7 +74,8 @@
               "hint": "输入备案原因",
               "type": 1,
               "required": true,
-              "submitKey": "bReason"
+              "submitKey": "bReason",
+              "matchingKey": "bReason"
             }
           ]
         },
@@ -83,11 +88,19 @@
               "hint": "输入拆除原因",
               "type": 1,
               "required": true,
-              "submitKey": "disReason"
+              "submitKey": "disReason",
+              "matchingKey": "disReason"
             }
           ]
         }
       ]
+    },
+    {
+      "label": "备注",
+      "hint": "请输入备注",
+      "type": 1,
+      "submitKey": "remark",
+      "matchingKey": "remark"
     }
   ]
 }

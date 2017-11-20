@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="15dp"
     android:orientation="vertical"
     tools:context="com.jg.jsonform.MainActivity">
 
@@ -22,12 +23,6 @@
         android:id="@+id/edit_asset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="填报带附件表单" />
-
-    <Button
-        android:id="@+id/show_attachment_form"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="查看带附件表单" />
+        android:text="附件表单" />
 
 </LinearLayout>

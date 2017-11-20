@@ -1,5 +1,6 @@
 package com.jg.jsonform.form;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,13 +23,18 @@ public abstract class FormActivity extends AppCompatActivity {
     protected Toolbar mToolbar;
     private ActionBar mActionBar;
 
+    private Fragment fragment;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
         initToolbar();
 
-        getFragmentManager().beginTransaction().add(R.id.Form_FrameLayout, getFormFragment()).commit();
+        fragment = getFormFragment();
+
+        if (fragment != null)
+            getFragmentManager().beginTransaction().add(R.id.Form_FrameLayout, fragment).commit();
     }
 
     /**
@@ -53,13 +59,13 @@ public abstract class FormActivity extends AppCompatActivity {
         });
     }
 
-    protected abstract FormRenderingFragment getFormFragment();
+    protected abstract Fragment getFormFragment();
 
     protected abstract String getToolbarTitle();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        getFormFragment().onActivityResult(requestCode, resultCode, data);
+        fragment.onActivityResult(requestCode, resultCode, data);
     }
 }

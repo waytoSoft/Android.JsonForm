@@ -1,4 +1,4 @@
-package com.jg.jsonform.form;
+package com.jg.jsonform.form.fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -23,6 +23,8 @@ import com.jg.jsonform.entity.FormEntity;
 import com.jg.jsonform.entity.SelectionBoxEntity;
 import com.jg.jsonform.entity.StructureEntity;
 import com.jg.jsonform.entity.TextEntity;
+import com.jg.jsonform.form.FormConstacts;
+import com.jg.jsonform.form.SelectPanelBottomDialog;
 import com.jg.jsonform.picture.SelectImageActivity;
 import com.jg.jsonform.picture.model.data.PictureEntity;
 import com.jg.jsonform.utils.IDateTimeUtils;
@@ -56,9 +58,10 @@ public abstract class FormRenderingFragment extends Fragment {
 
     private ImageAttachmentView mImageAttachmentView;
 
+    /*图片控制参数*/
     public boolean isImage;
-
     public boolean isImagRequired;
+    public String imgSubmitKey, imgMatchingKey;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -76,11 +79,6 @@ public abstract class FormRenderingFragment extends Fragment {
         renderingView();
 
         return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
     }
 
     /**
@@ -146,6 +144,8 @@ public abstract class FormRenderingFragment extends Fragment {
         /*初始化附件*/
         isImage = structureEntity.isImg();
         isImagRequired = structureEntity.isImgRequired();
+        imgSubmitKey = structureEntity.getSubmitKey();
+        imgMatchingKey = structureEntity.getMatchingKey();
 
         mImageAttachmentView.setVisibility(isImage ? View.VISIBLE : View.GONE);
         mImageAttachmentViewTitle.setVisibility(isImage ? View.VISIBLE : View.GONE);
@@ -422,18 +422,35 @@ public abstract class FormRenderingFragment extends Fragment {
             mBottomLayout.setVisibility(View.GONE);
         }
 
-        if (mContainerLayout != null) {
+        try {
+            JSONObject jsonObject = new JSONObject(formJson);
+            /*处理附件*/
+            if (jsonObject.toString().contains(imgMatchingKey)) {
+                String attachmentJson = jsonObject.getString(imgMatchingKey);
+                List<String> attachments = new Gson().fromJson(attachmentJson, new TypeToken<ArrayList<String>>() {
+                }.getType());
+
+                renderingAttachment(attachments, enabled);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (mContainerLayout != null && mContainerLayout.getChildCount() > 0) {
             renderingFormDetailsData(formJson, enabled, false, mContainerLayout);
         }
 
-        if (mMoreContainerLayout != null) {
+        if (mMoreContainerLayout != null && mMoreContainerLayout.getChildCount() > 0) {
             renderingFormDetailsData(formJson, enabled, true, mMoreContainerLayout);
         }
 
-        if (selectionBoxView != null) {
-            selectionBoxView.renderingView(formJson, enabled);
-            renderingFormDetailsData(formJson, enabled, false, selectionBoxView.getContainerView());
-        }
+//        if (selectionBoxView != null) {
+//            /*渲染处理FormSelectionBoxView值*/
+//            selectionBoxView.renderingView(formJson, enabled);
+//
+//            /*渲染处理FormSelectionBoxView值对应的ItemView*/
+//            renderingFormDetailsData(formJson, enabled, false, selectionBoxView.getContainerView());
+//        }
 
     }
 
@@ -452,15 +469,6 @@ public abstract class FormRenderingFragment extends Fragment {
         int count = layout.getChildCount();
         try {
             JSONObject jsonObject = new JSONObject(formJson);
-            /*处理附件*/
-            if (!isFlod && jsonObject.toString().contains("Attachments")) {
-                String attachmentJson = jsonObject.getString("Attachments");
-                List<String> attachments = new Gson().fromJson(attachmentJson, new TypeToken<ArrayList<String>>() {
-                }.getType());
-
-                renderingAttachment(attachments, enabled);
-            }
-
             for (int i = 0; i < count; i++) {
                 View view = layout.getChildAt(i);
 
@@ -487,10 +495,15 @@ public abstract class FormRenderingFragment extends Fragment {
 
                     renderingTextViewData(selectView, formEntity, value, enabled);
 
-                }else if (type==FormConstacts.FormType.SelectionBox.getValue()){
-                    FormSelectionBoxView selectionBoxView =(FormSelectionBoxView)view;
+                } else if (type == FormConstacts.FormType.SelectionBox.getValue()) {
+                    if (selectionBoxView == null)
+                        return;
 
-                    selectionBoxView.renderingView(formJson,enabled);
+                    /*渲染处理FormSelectionBoxView值*/
+                    selectionBoxView.renderingView(formJson, enabled);
+
+                    /*渲染处理FormSelectionBoxView值对应的ItemView*/
+                    renderingFormDetailsData(formJson, enabled, false, selectionBoxView.getContainerView());
                 }
             }
         } catch (Exception e) {
@@ -737,47 +750,22 @@ public abstract class FormRenderingFragment extends Fragment {
             }
         }
 
-//        if (isMatchingAccessories) {
-//            /*获取图片资源*/
-//            String images = null;
-//            if (isImg && isImgRequired) {
-//                if (TextUtils.isEmpty(mImageAttachmentView.getImageStrs())) {
-//                    WaytoProgressDialog.showPromptMessage(getContext(), R.mipmap.icon_tip, "图片不能为空");
-//                    return jsonObject;
-//                }
-//                images = mImageAttachmentView.getImageStrs();
-//            }
-//
-//            /*获取视频资源*/
-//            String videoPaths = null;
-//            if (isVideo && isVideoRequired) {
-//                List<MediaObject> path = MediaBiz.getInstance().getmMediaObject();
-//                if (path == null || path.size() == 0) {
-//                    WaytoProgressDialog.showPromptMessage(getContext(), R.mipmap.icon_tip, "视频不能为空");
-//                    return jsonObject;
-//                }
-//                StringBuffer stringBuffer = new StringBuffer();
-//                for (MediaObject object : path) {
-//                    stringBuffer.append(object.getObjectFilePath()).append(",");
-//                }
-//                videoPaths = stringBuffer.substring(0, stringBuffer.length() - 1);
-//            }
-
-//            try {
-//                String attr = "";
-//                if (!TextUtils.isEmpty(images)) {
-//                    attr = images;
-//                }
-//                if (!TextUtils.isEmpty(videoPaths)) {
-//                    if (!TextUtils.isEmpty(attr)) {
-//                        attr = attr + "," + videoPaths;
-//                    }
-//                }
-//                jsonObject.put("AttachmentMark", attr);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
+        if (isMatchingAccessories) {
+            /*获取图片资源*/
+            String images = null;
+            if (isImage && isImagRequired) {
+                if (TextUtils.isEmpty(mImageAttachmentView.getImageStrs())) {
+                    Toast.makeText(getActivity(), "图片不能为空", Toast.LENGTH_LONG).show();
+                    return jsonObject;
+                }
+                images = mImageAttachmentView.getImageStrs();
+            }
+            try {
+                jsonObject.put(imgSubmitKey, images);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         return jsonObject;
     }
@@ -815,7 +803,8 @@ public abstract class FormRenderingFragment extends Fragment {
         if (resultCode == SelectImageActivity.SELECT_PICTURE_RESULT_CODE) {
             if (resultCode == SelectImageActivity.SELECT_PICTURE_RESULT_CODE) {
                 List<PictureEntity> lists = (List<PictureEntity>) data.getSerializableExtra("imgs");
-                mImageAttachmentView.setImageListToEntity(lists);
+                if (mImageAttachmentView != null)
+                    mImageAttachmentView.setImageListToEntity(lists);
             }
         }
     }

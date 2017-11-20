@@ -5,7 +5,8 @@
       "hint": "输入设施编号",
       "type": 1,
       "required": true,
-      "submitKey": "assetCode"
+      "submitKey": "assetCode",
+      "matchingKey":"assetCode"
     },
     {
       "label": "设施类型",
@@ -13,6 +14,7 @@
       "type": 2,
       "required": true,
       "submitKey": "type",
+       "matchingKey":"type",
       "text": {
         "superClick": true
       }
@@ -23,6 +25,7 @@
       "type": 2,
       "required": true,
       "submitKey": "status",
+       "matchingKey":"status",
       "text": {
         "key": [
           "正常",
@@ -44,6 +47,7 @@
       "type": 2,
       "required": true,
       "submitKey": "address",
+       "matchingKey":"address",
       "text": {
         "icon": "ic_location24",
         "superClick": true
@@ -54,6 +58,7 @@
       "value": "currentData",
       "type": 1,
       "submitKey": "PlatedTime",
+       "matchingKey":"PlatedTime",
       "edit": {
         "enabled": false
       }
@@ -63,6 +68,7 @@
       "value": "张山山",
       "type": 1,
       "submitKey": "ResponsibleName",
+       "matchingKey":"ResponsibleName",
       "edit": {
         "enabled": false
       }
@@ -71,7 +77,8 @@
       "label": "备注",
       "hint": "输入备注",
       "type": 1,
-      "submitKey": "remark"
+      "submitKey": "remark",
+     "matchingKey":"remark"
     }
   ],
   "flodForm": [
